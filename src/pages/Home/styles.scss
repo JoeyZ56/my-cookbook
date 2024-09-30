@@ -1,0 +1,48 @@
+.home-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .home-title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+  //category Links
+  .home-cat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 150px;
+  }
+
+  .cat-link-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .cat-link {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+    border: 1px solid #000;
+    text-decoration: none;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

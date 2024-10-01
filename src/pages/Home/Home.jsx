@@ -17,7 +17,7 @@ const Home = () => {
         <div className="cat-links-container">
           <div className="cat-link-container">
             <Link
-              to="/category/1"
+              to="/breakfast"
               className="cat-link"
               style={{
                 backgroundImage: `url(${images.breakfast})`,

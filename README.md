@@ -1,8 +1,17 @@
-# React + Vite
+<div>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# My Cookbook to store the endless recepies i hold scattered around my kitchen!
 
-Currently, two official plugins are available:
+### Base Idea of this app is to be able to seperate recipes by breakfast, lunch and dinner into categoreis. then further seperation by meal types. Such as Mexican, Chineese, American... etc.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### core programming ideas for website:
+
+#### 1. Form to create new recipies to be added into specific categories
+
+#### 2. Individual pages for each recipe providing images and detailed instructions, calorie count, and subsitutes for creating a recipe.
+
+#### 3. Breaking down each item into categories for easier search and filter.
+
+#### 4. Most important none of that life story attached to the recipe that so many recipe websites love to share! Just 👏 the 👏 recipe 👏 PLEASE!
+
+</div>

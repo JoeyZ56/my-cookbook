@@ -1,0 +1,79 @@
+.form-main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .form-title-container {
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+  }
+
+  .form-input-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    label {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 300px;
+      height: 50px;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #000;
+      border-radius: 10px;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.recipe-form-btn {
+  width: 300px;
+  height: 50px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+//Back button
+.recipe-form-back-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 50px;
+  height: 30px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 10px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}

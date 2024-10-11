@@ -35,7 +35,7 @@ const Dinner = () => {
           <Link
             className="link"
             style={{
-              backgroundImage: `url(${images.Mexican})`,
+              backgroundImage: `url(${images.Italian})`,
               backgroundSize: "cover",
             }}
           >
@@ -44,11 +44,11 @@ const Dinner = () => {
           <Link
             className="link"
             style={{
-              backgroundImage: `url(${images.Italian})`,
+              backgroundImage: `url(${images.Asian})`,
               backgroundSize: "cover",
             }}
           >
-            Asain Cuisines
+            Asian Cuisines
           </Link>
           <Link
             className="link"

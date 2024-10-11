@@ -27,7 +27,7 @@ const Home = () => {
               Breakfast
             </Link>
             <Link
-              to="/category/2"
+              to="/lunch"
               className="cat-link"
               style={{
                 backgroundImage: `url(${images.lunch})`,
@@ -37,7 +37,7 @@ const Home = () => {
               Lunch
             </Link>
             <Link
-              to="/category/3"
+              to="/dinner"
               className="cat-link"
               style={{
                 backgroundImage: `url(${images.dinner})`,
@@ -47,7 +47,7 @@ const Home = () => {
               Dinner
             </Link>{" "}
             <Link
-              to="/category/4"
+              to="/dessert"
               className="cat-link"
               style={{
                 backgroundImage: `url(${images.dessert})`,
@@ -58,7 +58,11 @@ const Home = () => {
             </Link>
           </div>
         </div>
-        <div className="home-categories"></div>
+      </div>
+      <div className="home-recipe-form-container">
+        <Link to="/recipe-from" className="home-recipe-form-link">
+          Add A Recipe!
+        </Link>
       </div>
     </div>
   );

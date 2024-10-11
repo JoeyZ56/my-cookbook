@@ -1,6 +1,6 @@
-import sandwiches from "../../assets/lunch/sandwiches.png";
-import wraps from "../../assets/lunch/wraps.png";
-import salads from "../../assets/lunch/salads.png";
+import sandwiches from "../../assets/category-images/lunch/sandwiches.png";
+import wraps from "../../assets/category-images/lunch/wraps.png";
+import salads from "../../assets/category-images/lunch/salads.png";
 
 const images = { salads, sandwiches, wraps };
 

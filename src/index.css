@@ -1,0 +1,7 @@
+body {
+  background-image: url("../src/assets/background-images/background1.png");
+  background-size: cover;
+
+  margin: auto;
+  padding: auto;
+}

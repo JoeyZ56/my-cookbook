@@ -14,4 +14,12 @@
 
 #### 4. Most important none of that life story attached to the recipe that so many recipe websites love to share! Just 👏 the 👏 recipe 👏 PLEASE!
 
+## Progress and Fixes
+
+### 1. Finish adding logic to Lunch, Dinner, and Desserts for adding recipes to local storage.
+
+### 2. Make final adjustments on Scss
+
+### 3. Fix issues with recipes not saving to local storgae.
+
 </div>

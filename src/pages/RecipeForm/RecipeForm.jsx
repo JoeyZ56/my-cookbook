@@ -1,55 +1,83 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./styles.scss";
 
 const RecipeForm = () => {
   const [newRecipe, setNewRecipe] = useState({
     name: "",
-    image: "",
-    ingirdents: [],
+    ingredients: [],
     instructions: "",
+    category: "select",
   });
+  const [loading, setLoading] = useState(false);
+  const [recipes, setRecipes] = useState([]); // Store fetched recipes
 
-  const [ingirdentInput, setIngirdentInput] = useState("");
-
-  const handlerecipeChange = (e) => {
+  const handleRecipeChange = (e) => {
     const { name, value } = e.target;
-    setNewRecipe((prevRecipe) => ({
-      ...prevRecipe,
+    setNewRecipe((prevState) => ({
+      ...prevState,
       [name]: value,
     }));
-  };
-
-  const handleIngridentsChange = () => {
-    if (ingirdentInput.trim() === "") return;
-
-    setNewRecipe((prevRecipe) => ({
-      ...prevRecipe,
-      ingirdents: [...prevRecipe.ingirdents, ingirdentInput],
-    }));
-    setIngirdentInput("");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefautl();
-
-    const savedRecipe = JSON.parse(localStorage.getItem("newRecipe")) || [];
-    const updateRecipe = [...savedRecipe, newRecipe];
-
-    localStorage.setItem("newRecipe", JSON.stringify(updateRecipe));
-
-    setNewRecipe({
-      name: "",
-      image: "",
-      ingirdents: [],
-      instructions: "",
-      category: "",
-    });
-    alert("recipe created successfully");
   };
 
   const handleBackbtn = () => {
     window.history.back();
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("name", newRecipe.name);
+      formData.append("ingredients", JSON.stringify(newRecipe.ingredients));
+      formData.append("instructions", newRecipe.instructions);
+      formData.append("image", e.target.image.files[0]);
+      formData.append("category", newRecipe.category);
+
+      const res = await fetch("http://localhost:5003/api/recipes", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        throw new Error("Error submitting recipe!");
+      }
+
+      const data = await res.json();
+      alert("Recipe added successfully!");
+      console.log("Form Data:", data);
+
+      setNewRecipe({
+        name: "",
+        ingredients: [],
+        instructions: "",
+        category: "select",
+      });
+    } catch (error) {
+      console.log("Error submitting recipe:", error.message);
+      alert("Failed to submit recipe!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const fetChRecipe = async () => {
+      try {
+        const res = await fetch("http://localhost:5003/api/recipes");
+        if (!res.ok) {
+          throw new Error("Failed fetching formData from the backend");
+        }
+        const data = await res.json();
+        console.log("Fetch Data:", data);
+        setRecipes(data); // Store fetched recipes
+      } catch (error) {
+        console.error("Failed to fetch formData from backend:", error.message);
+      }
+    };
+    fetChRecipe();
+  }, []);
 
   return (
     <>
@@ -57,73 +85,51 @@ const RecipeForm = () => {
         Back
       </button>
       <div className="form-main-container">
-        <div className="form-title-container">
-          <h1>Add a Recipe</h1>
-        </div>
+        <h1>Add a Recipe</h1>
         <form onSubmit={handleSubmit}>
-          <div className="form-input-container">
-            <label>Recipe Name</label>
-            <input
-              type="text"
-              name="name"
-              value={newRecipe.name}
-              onChange={handlerecipeChange}
-              placeholder="Recipe Name"
-            />
-          </div>
-          <div className="form-input-container">
-            <label>Image</label>
-            <input
-              type="text"
-              name="image"
-              value={newRecipe.image}
-              onChange={handlerecipeChange}
-              placeholder="Image URL"
-            />
-          </div>
-          <div className="form-input-container">
-            <label>Ingredients</label>
-            <input
-              type="text"
-              name="ingredients"
-              value={ingirdentInput}
-              onChange={(e) => setIngirdentInput(e.target.value)}
-              placeholder="Ingredients"
-            />
-            <button onClick={handleIngridentsChange}>Add Ingirdent</button>
-            <ul>
-              {newRecipe.ingirdents.map((item, index) => {
-                <li key={index}>{item}</li>;
-              })}
-            </ul>
-          </div>
+          <input
+            type="text"
+            name="name"
+            value={newRecipe.name}
+            onChange={handleRecipeChange}
+            placeholder="Recipe Name"
+          />
 
-          <div className="form-input-container">
-            <label>Instructions</label>
-            <textarea
-              type="text"
-              name="instructions"
-              value={newRecipe.instructions}
-              onChange={handlerecipeChange}
-              placeholder="Instructions"
-            />
-          </div>
-          <div className="form-input-container">
-            <label>Category</label>
-            <select
-              name="category"
-              value={newRecipe.category}
-              onChange={handlerecipeChange}
-            >
-              <option value="select">Category</option>
-              <option value="breakfast">Breakfast</option>
-              <option value="lunch">Lunch</option>
-              <option value="dinner">Dinner</option>
-              <option value="dessert">Dessert</option>
-            </select>
-          </div>
+          <input
+            type="text"
+            value={newRecipe.ingredients}
+            onChange={handleRecipeChange}
+            placeholder="Ingredient"
+          />
+
+          <textarea
+            name="instructions"
+            value={newRecipe.instructions}
+            onChange={handleRecipeChange}
+            placeholder="Instructions"
+          />
+
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            className="file-input"
+          />
+
+          <select
+            name="category"
+            value={newRecipe.category}
+            onChange={handleRecipeChange}
+          >
+            <option value="select">Select Category</option>
+            <option value="breakfast">Breakfast</option>
+            <option value="lunch">Lunch</option>
+            <option value="dinner">Dinner</option>
+            <option value="dessert">Dessert</option>
+          </select>
+
           <button type="submit" className="recipe-form-btn">
-            Add Recipe
+            {loading ? "Adding..." : "Add Recipe"}
           </button>
         </form>
       </div>

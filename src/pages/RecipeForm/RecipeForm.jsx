@@ -9,7 +9,7 @@ const RecipeForm = () => {
     category: "select",
   });
   const [loading, setLoading] = useState(false);
-  const [recipes, setRecipes] = useState([]); // Store fetched recipes
+  const [setRecipes] = useState([]); // Store fetched recipes
 
   const handleRecipeChange = (e) => {
     const { name, value } = e.target;
@@ -30,12 +30,12 @@ const RecipeForm = () => {
     try {
       const formData = new FormData();
       formData.append("name", newRecipe.name);
-      formData.append("ingredients", JSON.stringify(newRecipe.ingredients));
+      formData.append("ingredients", newRecipe.ingredients);
       formData.append("instructions", newRecipe.instructions);
       formData.append("image", e.target.image.files[0]);
       formData.append("category", newRecipe.category);
 
-      const res = await fetch("http://localhost:5003/api/recipes", {
+      const res = await fetch("/api/recipes", {
         method: "POST",
         body: formData,
       });
@@ -85,7 +85,7 @@ const RecipeForm = () => {
         Back
       </button>
       <div className="form-main-container">
-        <h1>Add a Recipe</h1>
+        <h1>Add a Recipe to the pile!</h1>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -93,13 +93,16 @@ const RecipeForm = () => {
             value={newRecipe.name}
             onChange={handleRecipeChange}
             placeholder="Recipe Name"
+            required
           />
 
           <input
             type="text"
+            name="ingredients"
             value={newRecipe.ingredients}
             onChange={handleRecipeChange}
-            placeholder="Ingredient"
+            placeholder="Ingredients"
+            required
           />
 
           <textarea
@@ -107,6 +110,7 @@ const RecipeForm = () => {
             value={newRecipe.instructions}
             onChange={handleRecipeChange}
             placeholder="Instructions"
+            required
           />
 
           <input
@@ -114,12 +118,14 @@ const RecipeForm = () => {
             name="image"
             accept="image/*"
             className="file-input"
+            required
           />
 
           <select
             name="category"
             value={newRecipe.category}
             onChange={handleRecipeChange}
+            required
           >
             <option value="select">Select Category</option>
             <option value="breakfast">Breakfast</option>

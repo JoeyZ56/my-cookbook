@@ -1,83 +1,94 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./styles.scss";
 
 const RecipeForm = () => {
-  const [newRecipe, setNewRecipe] = useState({
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
     name: "",
-    ingredients: [],
+    ingredients: "",
     instructions: "",
+    fileUpload: null,
     category: "select",
   });
-  const [loading, setLoading] = useState(false);
-  const [setRecipes] = useState([]); // Store fetched recipes
 
-  const handleRecipeChange = (e) => {
-    const { name, value } = e.target;
-    setNewRecipe((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
+  //back button handler
   const handleBackbtn = () => {
     window.history.back();
   };
 
-  const handleSubmit = async (e) => {
+  //handle input change
+  /* The handleRecipeChange function is responsible for 
+  dynamically updating the formData state whenever 
+  the user types into any input field (name, ingredients, etc.). */
+  const handleRecipeChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  //handle file upload
+  /* The handleFileUpload function is responsible for 
+  handling the image file uploaded by the user. 
+  It updates the formData state with the uploaded file. */
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setFormData((prev) => ({
+        ...prev,
+        fileUpload: file,
+      }));
+    }
+  };
+
+  //form handler
+  /* The handleFormSubmit function is triggered when 
+  the user submits the recipe form. Its job is to:
+  
+	1.	Prevent the default form submission behavior.
+	2.	Package the form data (including the image) into a FormData object.
+	3.	Send the data to the backend using a POST request.
+	4.	Handle the response and provide feedback to the user. */
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
+    const data = new FormData();
+    data.append("name", formData.name);
+    data.append("ingredients", formData.ingredients);
+    data.append("instructions", formData.instructions);
+    data.append("category", formData.category);
+    if (formData.fileUpload) {
+      data.append("image", formData.fileUpload);
+    }
+
     try {
-      const formData = new FormData();
-      formData.append("name", newRecipe.name);
-      formData.append("ingredients", newRecipe.ingredients);
-      formData.append("instructions", newRecipe.instructions);
-      formData.append("image", e.target.image.files[0]);
-      formData.append("category", newRecipe.category);
-
-      const res = await fetch("/api/recipes", {
+      const res = await fetch(`${import.meta.env.VITE_API_KEY}/api/recipes`, {
         method: "POST",
-        body: formData,
+        body: data,
       });
-
       if (!res.ok) {
-        throw new Error("Error submitting recipe!");
+        throw new Error("Failed to submit recipe");
       }
 
-      const data = await res.json();
-      alert("Recipe added successfully!");
-      console.log("Form Data:", data);
-
-      setNewRecipe({
+      //reset form on success
+      setFormData({
         name: "",
-        ingredients: [],
+        ingridients: "",
         instructions: "",
+        fileUpload: null,
         category: "select",
       });
+      alert("Recipe has been added");
+      window.location.href = "/";
     } catch (error) {
-      console.log("Error submitting recipe:", error.message);
-      alert("Failed to submit recipe!");
+      console.error(error);
+      alert("Error occured submitting recipe");
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    const fetChRecipe = async () => {
-      try {
-        const res = await fetch("http://localhost:5003/api/recipes");
-        if (!res.ok) {
-          throw new Error("Failed fetching formData from the backend");
-        }
-        const data = await res.json();
-        console.log("Fetch Data:", data);
-        setRecipes(data); // Store fetched recipes
-      } catch (error) {
-        console.error("Failed to fetch formData from backend:", error.message);
-      }
-    };
-    fetChRecipe();
-  }, []);
 
   return (
     <>
@@ -86,11 +97,11 @@ const RecipeForm = () => {
       </button>
       <div className="form-main-container">
         <h1>Add a Recipe to the pile!</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleFormSubmit}>
           <input
             type="text"
             name="name"
-            value={newRecipe.name}
+            value={formData.name}
             onChange={handleRecipeChange}
             placeholder="Recipe Name"
             required
@@ -99,15 +110,15 @@ const RecipeForm = () => {
           <input
             type="text"
             name="ingredients"
-            value={newRecipe.ingredients}
+            value={formData.ingredients}
             onChange={handleRecipeChange}
-            placeholder="Ingredients"
+            placeholder="ingredients"
             required
           />
 
           <textarea
             name="instructions"
-            value={newRecipe.instructions}
+            value={formData.instructions}
             onChange={handleRecipeChange}
             placeholder="Instructions"
             required
@@ -117,13 +128,14 @@ const RecipeForm = () => {
             type="file"
             name="image"
             accept="image/*"
+            onChange={handleFileUpload}
             className="file-input"
             required
           />
 
           <select
             name="category"
-            value={newRecipe.category}
+            value={formData.category}
             onChange={handleRecipeChange}
             required
           >

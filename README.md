@@ -1,25 +1,30 @@
-<div>
+### What is DishBoard?
 
-# My Cookbook to store the endless recepies i hold scattered around my kitchen!
+DishBoard is a community of users who share and collect recipes for cooking all variety of meals. The goal is to create a community to help those who want to learn to cook better or find an easy meal to make without the grind searching far and wide on the internet for a good idea.
 
-### Base Idea of this app is to be able to seperate recipes by breakfast, lunch and dinner into categoreis. then further seperation by meal types. Such as Mexican, Chineese, American... etc.
+### User Stories
 
-### core programming ideas for website:
+- As a user I can sign up for an account to collect recipes that the communty as posted.
 
-#### 1. Form to create new recipies to be added into specific categories
+-As a user I can customize my profile. provide a profile image, bio section, or a link to my favorite recipes.
 
-#### 2. Individual pages for each recipe providing images and detailed instructions, calorie count, and subsitutes for creating a recipe.
+-As a user I can create recipes, edit recipes, or delete my recipes from the website.
 
-#### 3. Breaking down each item into categories for easier search and filter.
+-As a user I can like/comment on recipes to talk about what I liked, disliked or would change for the recipe.
 
-#### 4. Most important none of that life story attached to the recipe that so many recipe websites love to share! Just 👏 the 👏 recipe 👏 PLEASE!
+-As a user I can search for recipes by name, category, or most liked recipes.
 
-## Progress and Fixes
+-As a user i can change light or dark mode of the screen for my personal prefrence of color I prefer.
 
-### 1. Finish adding logic to Lunch, Dinner, and Desserts for adding recipes to local storage.
+### Material UI Design
 
-### 2. Make final adjustments on Scss
+##### Colors
 
-### 3. Fix issues with recipes not saving to local storgae.
+Rustic Kitchen Palette
+• Primary: Earthy Brown (#795548)
+• Accent: Golden Yellow (#FFC107)
+• Background: Warm Cream (#FFF3E0)
 
-</div>
+##### Home Page
+
+### Issues:

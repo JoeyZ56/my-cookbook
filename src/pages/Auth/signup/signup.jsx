@@ -22,11 +22,6 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  //Back button
-  function handleBackBtn() {
-    return window.history.back();
-  }
-
   //Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,9 +63,6 @@ const Signup = () => {
   return (
     <>
       <HamburgerMenu />
-      <Button onClick={handleBackBtn} variant="contained" color="primary">
-        back
-      </Button>
 
       <Box
         component="form"
@@ -85,7 +77,7 @@ const Signup = () => {
           marginTop: "3rem",
           padding: 3,
           border: "1px solid #ccc",
-          backgroundColor: "#fff",
+          backgroundColor: "#FFF3E0",
           borderRadius: 2,
           boxShadow: 3,
         }}
@@ -98,7 +90,31 @@ const Signup = () => {
         {error && <Alert severity="error">{error}</Alert>}
 
         {/* Username Field */}
-        <TextField label="Username" variant="outlined" required fullWidth />
+        <TextField
+          label="Username"
+          variant="outlined"
+          required
+          fullWidth
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
+        />
 
         {/* Email Field */}
         <TextField
@@ -111,6 +127,25 @@ const Signup = () => {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
         />
 
         {/* Password Field */}
@@ -122,6 +157,25 @@ const Signup = () => {
           fullWidth
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
         />
         {/* Confirm Password */}
         <TextField
@@ -132,11 +186,39 @@ const Signup = () => {
           fullWidth
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
         />
 
         {/* Sign Up Button */}
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{
+            backgroundColor: "#FFC107",
+            color: "#000",
+            "&:hover": { backgroundColor: "#FFB300" },
+          }}
+        >
           {loading ? (
             <CircularProgress size={24} colore="inherit" />
           ) : (
@@ -149,8 +231,12 @@ const Signup = () => {
           component={Link}
           to="/login"
           variant="contained"
-          color="primary"
           fullWidth
+          sx={{
+            backgroundColor: "#FFC107",
+            color: "#000",
+            "&:hover": { backgroundColor: "#FFB300" },
+          }}
         >
           Already a User? Login
         </Button>

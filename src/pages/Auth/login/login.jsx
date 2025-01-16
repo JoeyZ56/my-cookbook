@@ -1,16 +1,12 @@
 // Import necessary MUI components
 import { TextField, Button, Box, Typography } from "@mui/material";
 import HamburgerMenu from "../../../components/hamburgerMenu";
+import { Link } from "react-router-dom";
+
 const Login = () => {
-  function handleBackBtn() {
-    return window.history.back();
-  }
   return (
     <>
       <HamburgerMenu />
-      <Button onClick={handleBackBtn} variant="contained" color="primary">
-        back
-      </Button>
 
       <Box
         component="form"
@@ -40,6 +36,25 @@ const Login = () => {
           variant="outlined"
           required
           fullWidth
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
         />
 
         {/* Password Field */}
@@ -49,11 +64,52 @@ const Login = () => {
           variant="outlined"
           required
           fullWidth
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
         />
 
         {/* Sign Up Button */}
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button
+          type="submit"
+          variant="contained"
+          fullWidth
+          sx={{
+            backgroundColor: "#FFC107",
+            color: "#000",
+            "&:hover": { backgroundColor: "#FFB300" },
+          }}
+        >
           Login
+        </Button>
+        <Button
+          component={Link}
+          to="/signup"
+          variant="contained"
+          fullWidth
+          sx={{
+            backgroundColor: "#FFC107",
+            color: "#000",
+            "&:hover": { backgroundColor: "#FFB300" },
+          }}
+        >
+          Not a User? Sign up
         </Button>
       </Box>
     </>

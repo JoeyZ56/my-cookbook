@@ -1,20 +1,26 @@
 import { useState } from "react";
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Alert,
+  CircularProgress,
+  MenuItem,
+} from "@mui/material";
+import HamburgerMenu from "../../components/hamburgerMenu";
 import "./styles.scss";
 
 const RecipeForm = () => {
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
+    recipeName: "",
     ingredients: "",
     instructions: "",
     fileUpload: null,
     category: "select",
   });
-
-  //back button handler
-  const handleBackbtn = () => {
-    window.history.back();
-  };
+  const [error, setError] = useState(null);
 
   //handle input change
   /* The handleRecipeChange function is responsible for 
@@ -54,8 +60,20 @@ const RecipeForm = () => {
     e.preventDefault();
     setLoading(true);
 
+    if (
+      !formData.recipeName ||
+      !formData.ingredients ||
+      !formData.instructions ||
+      !formData.fileUpload ||
+      !formData.category
+    ) {
+      setError("All Feilds are required!");
+      setLoading(false);
+      return;
+    }
+
     const data = new FormData();
-    data.append("name", formData.name);
+    data.append("name", formData.recipeName);
     data.append("ingredients", formData.ingredients);
     data.append("instructions", formData.instructions);
     data.append("category", formData.category);
@@ -74,7 +92,7 @@ const RecipeForm = () => {
 
       //reset form on success
       setFormData({
-        name: "",
+        recipeName: "",
         ingridients: "",
         instructions: "",
         fileUpload: null,
@@ -92,65 +110,102 @@ const RecipeForm = () => {
 
   return (
     <>
-      <button onClick={handleBackbtn} className="recipe-form-back-btn">
-        Back
-      </button>
-      <div className="form-main-container">
-        <h1>Add a Recipe to the pile!</h1>
-        <form onSubmit={handleFormSubmit}>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleRecipeChange}
-            placeholder="Recipe Name"
-            required
-          />
+      <HamburgerMenu />
 
-          <input
-            type="text"
-            name="ingredients"
-            value={formData.ingredients}
-            onChange={handleRecipeChange}
-            placeholder="ingredients"
-            required
-          />
+      <Box
+        component="form"
+        onSubmit={handleFormSubmit}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          width: "100%",
+          maxWidth: 400,
+          margin: "auto",
+          marginTop: "3rem",
+          padding: 3,
+          border: "1px solid #ccc",
+          backgroundColor: "#fff",
+          borderRadius: 2,
+          boxShadow: 3,
+        }}
+      >
+        <Typography variant="h4" textAlign="center" gutterBottom>
+          Create Recipe
+        </Typography>
 
-          <textarea
-            name="instructions"
-            value={formData.instructions}
-            onChange={handleRecipeChange}
-            placeholder="Instructions"
-            required
-          />
+        {/* Error Message */}
+        {error && <Alert severity="error">{error}</Alert>}
 
+        {/* Recipe Name Field */}
+        <TextField
+          label="What do you call this recipe?"
+          name="recipeName"
+          variant="outlined"
+          required
+          fullWidth
+          value={formData.recipeName}
+          onChange={handleRecipeChange}
+        />
+
+        {/* Ingredients Field */}
+        <TextField
+          label="What ingredients are used?"
+          name="ingredients"
+          variant="outlined"
+          required
+          fullWidth
+          value={formData.ingredients}
+          onChange={handleRecipeChange}
+        />
+        {/* Instructions Field */}
+        <TextField
+          label="How do you make this meal?"
+          name="instructions"
+          variant="outlined"
+          required
+          fullWidth
+          value={formData.instructions}
+          onChange={handleRecipeChange}
+        />
+
+        {/* Category Select */}
+
+        <TextField
+          select
+          label="Select Category"
+          name="category"
+          value={formData.category}
+          onChange={handleRecipeChange}
+          fullWidth
+        >
+          <MenuItem value="select">Select</MenuItem>
+          <MenuItem value="breakfast">Breakfast</MenuItem>
+          <MenuItem value="lunch">Lunch</MenuItem>
+          <MenuItem value="dinner">Dinner</MenuItem>
+        </TextField>
+
+        {/* Image Upload */}
+        <Button variant="contained" component="label" color="primary" fullWidth>
+          Upload Image
           <input
             type="file"
-            name="image"
+            hidden
             accept="image/*"
             onChange={handleFileUpload}
-            className="file-input"
-            required
           />
+        </Button>
 
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleRecipeChange}
-            required
-          >
-            <option value="select">Select Category</option>
-            <option value="breakfast">Breakfast</option>
-            <option value="lunch">Lunch</option>
-            <option value="dinner">Dinner</option>
-            <option value="dessert">Dessert</option>
-          </select>
+        {/* Submit Form Button */}
 
-          <button type="submit" className="recipe-form-btn">
-            {loading ? "Adding..." : "Add Recipe"}
-          </button>
-        </form>
-      </div>
+        <Button type="submit" variant="contained" color="primary" fullWidth>
+          {loading ? (
+            <CircularProgress size={24} colore="inherit" />
+          ) : (
+            "Submit Recipe"
+          )}
+        </Button>
+      </Box>
     </>
   );
 };

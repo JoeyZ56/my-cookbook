@@ -6,15 +6,15 @@ DishBoard is a community of users who share and collect recipes for cooking all 
 
 - As a user I can sign up for an account to collect recipes that the communty as posted.
 
--As a user I can customize my profile. provide a profile image, bio section, or a link to my favorite recipes.
+- As a user I can customize my profile. provide a profile image, bio section, or a link to my favorite recipes.
 
--As a user I can create recipes, edit recipes, or delete my recipes from the website.
+- As a user I can create recipes, edit MY recipes, or delete MY recipes from the website.
 
--As a user I can like/comment on recipes to talk about what I liked, disliked or would change for the recipe.
+- As a user I can like, comment, and rate recipes to talk about what I liked, disliked or would change for the recipe.
 
--As a user I can search for recipes by name, category, or most liked recipes.
+- As a user I can search for recipes by name, category, or most liked recipes.
 
--As a user i can change light or dark mode of the screen for my personal prefrence of color I prefer.
+- As a user i can change light or dark mode of the screen for my personal prefrence of color I prefer.
 
 ### Material UI Design
 

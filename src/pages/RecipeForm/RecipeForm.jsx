@@ -125,7 +125,7 @@ const RecipeForm = () => {
           marginTop: "3rem",
           padding: 3,
           border: "1px solid #ccc",
-          backgroundColor: "#fff",
+          backgroundColor: "#FFF3E0",
           borderRadius: 2,
           boxShadow: 3,
         }}
@@ -146,6 +146,25 @@ const RecipeForm = () => {
           fullWidth
           value={formData.recipeName}
           onChange={handleRecipeChange}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
         />
 
         {/* Ingredients Field */}
@@ -157,8 +176,29 @@ const RecipeForm = () => {
           fullWidth
           value={formData.ingredients}
           onChange={handleRecipeChange}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
         />
+
         {/* Instructions Field */}
+
         <TextField
           label="How do you make this meal?"
           name="instructions"
@@ -167,6 +207,25 @@ const RecipeForm = () => {
           fullWidth
           value={formData.instructions}
           onChange={handleRecipeChange}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
         />
 
         {/* Category Select */}
@@ -178,15 +237,44 @@ const RecipeForm = () => {
           value={formData.category}
           onChange={handleRecipeChange}
           fullWidth
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "black", // Default border color
+              },
+              "&:hover fieldset": {
+                borderColor: "black", // Border color on hover
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "black", // Border color when focused
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "black", // Label color
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: "black", // Label color when focused
+            },
+          }}
         >
           <MenuItem value="select">Select</MenuItem>
           <MenuItem value="breakfast">Breakfast</MenuItem>
           <MenuItem value="lunch">Lunch</MenuItem>
           <MenuItem value="dinner">Dinner</MenuItem>
+          <MenuItem value="dessert">Dessert</MenuItem>
         </TextField>
 
         {/* Image Upload */}
-        <Button variant="contained" component="label" color="primary" fullWidth>
+        <Button
+          variant="contained"
+          component="label"
+          sx={{
+            backgroundColor: "#FFC107",
+            color: "#000",
+            "&:hover": { backgroundColor: "#FFB300" },
+          }}
+          fullWidth
+        >
           Upload Image
           <input
             type="file"
@@ -198,7 +286,16 @@ const RecipeForm = () => {
 
         {/* Submit Form Button */}
 
-        <Button type="submit" variant="contained" color="primary" fullWidth>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            backgroundColor: "#FFC107",
+            color: "#000",
+            "&:hover": { backgroundColor: "#FFB300" },
+          }}
+          fullWidth
+        >
           {loading ? (
             <CircularProgress size={24} colore="inherit" />
           ) : (

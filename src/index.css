@@ -1,6 +1,5 @@
 body {
-  background-image: url("../src/assets/background-images/background1.png");
-  background-size: cover;
+  background-color: #795548;
 
   margin: auto;
   padding: auto;

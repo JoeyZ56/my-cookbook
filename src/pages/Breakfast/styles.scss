@@ -53,3 +53,29 @@
     transform: scale(1.1);
   }
 }
+
+//recipe form link
+.recipeform-link-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+.recipeform-message {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9);
+
+  span {
+    margin-left: 11rem;
+  }
+}
+.recipeform-link {
+  color: aqua;
+  &:hover {
+    color: #fff;
+    cursor: pointer;
+  }
+}

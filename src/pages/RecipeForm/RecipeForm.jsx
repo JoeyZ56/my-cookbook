@@ -205,6 +205,8 @@ const RecipeForm = () => {
           variant="outlined"
           required
           fullWidth
+          multiline
+          rows={4}
           value={formData.instructions}
           onChange={handleRecipeChange}
           sx={{

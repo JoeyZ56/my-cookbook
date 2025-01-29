@@ -18,13 +18,20 @@ DishBoard is a community of users who share and collect recipes for cooking all 
 
 ### Material UI Design
 
-##### Colors
+##### Colors: Rustic Kitchen Palette
 
-Rustic Kitchen Palette
-• Primary: Earthy Brown (#795548)
-• Accent: Golden Yellow (#FFC107)
-• Background: Warm Cream (#FFF3E0)
+    • Primary: Earthy Brown (#795548)
+    • Accent: Golden Yellow (#FFC107)
+    • Background: Warm Cream (#FFF3E0)
 
 ##### Home Page
+
+• Will Contain all of the current recipes from the database in decending order from most popular to least popular
+• Search bar to find recipes
+
+##### To Do's:
+
+• Connect to firebase authetication
+• finish backend for recipe form
 
 ### Issues:

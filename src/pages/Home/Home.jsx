@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Box, Grid, Typography, Button, CircularProgress } from "@mui/material";
-import images from "./images";
 import HamburgerMenu from "../../components/hamburgerMenu";
 
 /*
